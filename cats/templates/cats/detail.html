@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nuevo Gato{% endblock %}
+
+{% block links %}
+  <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+  <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+  <link rel="stylesheet" href="{% static 'css/option-menu.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dialog.css' %}">
+{% endblock %}
+
+{% block btn_back %}
+  <a class='btn-icon ic-back' href='{% url "cats:list" %}?{{request.GET.urlencode}}'></a>
+{% endblock %}
+
+{% block header_title %}
+  <div class='nav-title'>{{cat.name}}</div>
+{% endblock %}
+
+{% block nav_right_options %}
+  <button id='btn-option-menu' class='btn-icon ic-more'></button>
+{% endblock %}
+
+{% block content %}
+  <div class="detail-container">
+    
+    <img class='detail-image-wrapper' src='{% if cat.photo %}{{cat.photo.url}}{% endif %}'>
+    
+    <div class='detail-table-wrapper'>
+      
+      <div class='detail-table'>  
+        <label>Colonia</label>
+        <span>{% if cat.colony %}{{cat.colony}}{% else %}Sin Colonia{% endif %}</span>
+        
+        <label>Sexo</label>
+        <span>{{cat.get_gender_display}}</span>
+
+        <label>Esterilizado</label>
+        <span>
+          {% if cat.sterilized %}Sí{% else %}No{% endif %}
+          <span class='span-date'>{% if cat.sterilized and cat.sterlize_date %}({{cat.sterlize_date|date:"d/m/y"}}){% endif %}</span>
+        </span>
+        
+        <label>Frecuencia</label>
+        <span>{{cat.get_frequency_display}}</span>
+
+        <label>Sociabilidad</label>
+        <span>{{cat.get_sociability_display}}</span>
+
+        <label>Estado</label>
+        <span>{{cat.get_state_display}}</span>
+
+
+      </div>
+    
+      <button id='btn-show-more'>Mostrar más</button>
+    
+      <div id='div-detail-table' class='detail-table' style='display:none'>  
+          
+        <label>Edad</label>
+        <span>{% if cat.age %}cat.age{% else %}-{% endif %}</span>
+
+        <label>Avistamiento</label>
+        <span>{{cat.sighting_date|date:"d/m/y"}}</span>
+
+        <label>Registro</label>
+        <span>{{cat.record_date|date:"d/m/y"}}</span>
+
+        <label>Enfermedades</label>
+        <span></span>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block option_menu %}
+  <div id='option-menu' style='display:none'>
+    <ul class='option-menu-list'>
+      <li id='option-edit' data='{% url "cats:update" pk=cat.id %}'>Editar</li>
+      <li id='option-delete'>Eliminar</li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block modal %}
+  <!-- <div id='modal' class='modal-wrapper'> -->
+  <div id='modal' class='modal-wrapper' style='display:none;'>
+    <div class='modal-container'>
+      <header class='modal-header'>Eliminar gato</header>
+      <div class='modal-body'>¿Seguro que quiere eleminar este gato?</div>
+      <footer class='modal-footer'>
+        <button id='btn-positive' data='{% url "cats:delete" pk=cat.id %}'>Aceptar</button>
+        <button id='btn-negative'>Cancelar</button>
+      </footer>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script type='text/javascript' src="{% static 'js/option-menu.js' %}"></script>
+  <script type='text/javascript' src="{% static 'js/modal.js' %}"></script>
+  <script type='text/javascript' src="{% static 'cats/js/detail.js' %}"></script>
+{% endblock %}

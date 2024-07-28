@@ -1,0 +1,73 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Colonia {{colony.name}}{% endblock %}
+
+{% block links %}
+  <link rel='stylesheet' href='{% static "css/icons.css" %}'>
+  <link rel='stylesheet' href='{% static "css/detail.css" %}'>
+  <link rel='stylesheet' href='{% static "css/option-menu.css" %}'>
+  <link rel='stylesheet' href='{% static "css/dialog.css" %}'>
+{% endblock %}
+
+{% block btn_back %}
+  <a class='icon btn-icon ic-back' href='{% url "colonies:list" %}?{{request.GET.urlencode}}'></a>
+{% endblock %}
+
+{% block header_title %}
+  <div class='nav-title'>{{colony.name}}</div>
+{% endblock %}
+
+{% block nav_right_options %}
+  <button id='btn-option-menu' class='icon btn-icon ic-more'></button>
+{% endblock %}
+
+{% block content %}
+
+<div class='detail-container'>
+  
+  <div class='detail-table-wrapper'>
+      
+    <div class='detail-table'>  
+      <label>Nombre</label>
+      <span>{{colony.name}}</span>
+      
+      <label>Link Google Maps</label>
+      <a href={{colony.link_gmaps}}></a>
+    </div>
+  
+  </div>
+  
+</div>
+
+{% endblock %}
+
+{% block option_menu %}
+    <div id='option-menu' style='display:none'>
+    <ul class='option-menu-list'>
+      <li id='option-edit' data='{% url "colonies:update" pk=colony.id %}'>Editar</li>
+      <li id='option-delete'>Eliminar</li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block modal %}
+  <!-- <div id='modal' class='modal-wrapper'> -->
+  <div id='modal' class='modal-wrapper' style='display:none;'>
+    <div class='modal-container'>
+      <header class='modal-header'>Eliminar colonia</header>
+      <div class='modal-body'>¿Seguro que quiere elimintar esta colonia?</div>
+      <footer class='modal-footer'>
+        <button id='btn-positive' data='{% url "colonies:delete" pk=colony.id %}'>Aceptar</button>
+        <button id='btn-negative'>Cancelar</button>
+      </footer>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script type='text/javascript' src='{% static "js/option-menu.js" %}'></script>
+  <script type='text/javascript' src="{% static 'js/modal.js' %}"></script>
+  <script type='text/javascript' src='{% static "colonies/js/detail.js" %}'></script>
+{% endblock %}

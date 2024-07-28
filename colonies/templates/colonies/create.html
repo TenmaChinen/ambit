@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nueva Colonia{% endblock %}
+
+{% block links %}
+  <link rel='stylesheet' href='{% static "css/forms.css" %}'>
+  <link rel='stylesheet' href='{% static "css/icons.css" %}'>
+  <link rel='stylesheet' href='{% static "colonies/css/create.css" %}'>
+{% endblock %}
+
+{% block header_title %}
+  <div class='nav-title'>Nueva Colonia</div>
+{% endblock %}
+
+{% block content %}
+<div class='form-container'>
+
+  <div class='form-body'>
+    <form id='form' method='POST'>
+        {% csrf_token %}
+
+        <div class='form-list'>
+          <div class='form-field'>
+            {{form_colony.name.label_tag}}
+            {{form_colony.name}}
+          </div>
+
+          <div class='form-field div-link-map'>
+            {{form_colony.link_gmap.label_tag}}
+            <span class='span-link-map'>
+              {{form_colony.link_gmap}}
+              <a class='btn-icon ic-search' href='https://www.google.com/maps/@39.5719777,2.6284242,14z' target='_blank'></a>
+            </span>
+          </div>
+
+        </div>
+        
+    </form>
+  </div>
+
+  <div class='form-footer'>
+    <div></div>
+    <div class='footer-group'>
+      <button class='btn-form' onclick='history.back()'>Cancelar</button>
+      <button type='submit' form='form' class='btn-form'>Guardar</button>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

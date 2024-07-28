@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Colonia{% endblock %}
+
+{% block links %}
+  <link rel='stylesheet' href='{% static "css/forms.css" %}'>
+  <link rel='stylesheet' href='{% static "colonies/css/create.css" %}'>
+{% endblock %}
+
+{% block header_title %}
+  <div class='nav-title'>Editar</div>
+{% endblock %}
+
+{% block content %}
+
+  <div class='form-container'>
+
+    <div class='form-body'>
+      <form id='form' method='POST' enctype='multipart/form-data'>
+          {% csrf_token %}
+
+          <div class='form-list'>
+            {% for field in form_colony %}
+              <div class='form-field'>
+                {{field.label_tag}}
+                {{field}}
+                {{field.errors}}
+              </div>
+            {% endfor %}
+
+          </div>
+
+      </form>
+    </div>
+
+    <div class='form-footer'>
+      <div></div>
+      <div class='footer-group'>
+        <a type='button' class='btn-form' href='{% url "colonies:detail" pk=pk %}?{{request.GET.urlencode}}'>Cancelar</a>
+        <button type='submit' form='form' class='btn-form'>Guardar</button>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block modal %}
+
+  <div id='div-crop-container' style='display:none'>
+    <div class='div-crop-area'>
+      <img id='image-crop' src=''>
+    </div>
+    <div class='cropper-footer'>
+      <span id='btn-crop-close' class='btn-crop'>Cancelar</span>
+      <span id='btn-crop-save' class='btn-crop'>Aplicar</span>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+  
+{% endblock %}

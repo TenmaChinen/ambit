@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Gato{% endblock %}
+
+{% block links %}
+  <link rel='stylesheet' href='{% static "css/cropper.min.css" %}'>
+  <link rel='stylesheet' href='{% static "cats/css/image-cropper.css" %}'>
+  <link rel='stylesheet' href='{% static "css/forms.css" %}'>
+  <link rel='stylesheet' href='{% static "cats/css/create.css" %}'>
+{% endblock %}
+
+{% block btn_back %}
+  <a class='btn-icon ic-back' href='{% url "cats:detail" pk=pk %}?{{request.GET.urlencode}}'></a>
+{% endblock %}
+
+{% block header_title %}
+  <div class='nav-title'>Editar</div>
+{% endblock %}
+
+{% block content %}
+
+  <div class='form-container'>
+
+    <div class='form-body'>
+
+      <form id='form' method='POST' enctype='multipart/form-data'>
+        {% csrf_token %}
+
+          <div class='form-list'>
+            
+            <div class='form-field'>
+              {{form_cat.photo.label_tag}}
+              {{form_cat.photo}}
+              <div id='btn-image-placeholder'>
+                <i id='ic-image-placeholder' class='icon ic-image-placeholder'></i>
+                  <img id='image-tray' src='{% if photo_url %}{{photo_url}}{% endif %}'>
+              </div>
+            </div>
+
+            {% for field in form_cat.visible_fields|slice:'1:4' %}
+              <div class='form-field'>
+                {{field.label_tag}}
+                {{field}}
+                {{field.errors}}
+              </div>
+            {% endfor %}
+          
+            <div class='form-side'>
+                {{form_cat.sterilized.label_tag}}
+                {{form_cat.sterilized}}
+            </div>
+
+          </div>
+
+          <div id='btn-show-more' class='btn-form'>Mostrar más</div>
+          
+          <div id='hidden-panel' class='form-list' style='display: none;'>
+            
+            {% for field in form_cat.visible_fields|slice:'5:' %}
+              <div class='form-field'>
+                {{field.label_tag}}
+                {{field}}
+                {{field.errors}}
+              </div>    
+            {% endfor %}
+          
+          </div>
+
+          
+      </form>
+    </div>
+
+    <div class='form-footer'>
+      <div></div>
+      <div class='footer-group'>
+        <a type='button' class='btn-form' href='{% url "cats:detail" pk=pk %}?{{request.GET.urlencode}}'>Cancelar</a>
+        <button type='submit' form='form' class='btn-form'>Guardar</button>
+      </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block modal %}
+
+  <div id='div-crop-container' style='display:none'>
+    <div class='div-crop-area'>
+      <img id='image-crop' src=''>
+    </div>
+    <div class='cropper-footer'>
+      <span id='btn-crop-close' class='btn-crop'>Cancelar</span>
+      <span id='btn-crop-save' class='btn-crop'>Aplicar</span>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script type='text/javascript' src='{% static "js/cropper.min.js" %}'></script>
+  <script type='text/javascript' src='{% static "cats/js/image-cropper.js" %}'></script>
+  <script type='text/javascript' src='{% static "cats/js/create.js" %}'></script>
+{% endblock %}

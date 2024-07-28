@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Colonias{% endblock %}
+
+{% block links %}
+  <link rel="stylesheet" href="{% static 'css/list.css' %}">
+  <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+{% endblock %}
+
+{% block header_title %}
+  <div class='nav-title'>Colonias</div>
+{% endblock %}
+
+{% block nav_right_options %}
+  <a href="{% url 'colonies:create' %}"><i class='btn-icon ic-add'></i></a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="list-container">
+    
+    {% for colony in list_colony %}
+      <a class='list-item' href='{% url "colonies:detail" pk=colony.id %}'>
+        <div class='list-fields' >
+          <span class='list-item-name'>{{colony.name}}</span>
+        </div>
+      </a>
+    {% endfor %}
+      
+  </div>
+
+{% endblock %}

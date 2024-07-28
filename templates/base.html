@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		
+		<title>{% block title %}AMBIT{% endblock %}</title>
+
+		<link rel='stylesheet' href='{% static "css/base.css" %}'>
+		<link rel='stylesheet' href='{% static "css/icons.css" %}'>
+
+		{% block links %}{% endblock %}
+		
+		{% block styles %}{% endblock %}
+
+	</head>
+
+	<body>
+		<nav class='nav-top'>
+			<div class='nav-pack'>
+				<button class='btn-side-bar-open' onclick='openNav()'>☰</button>
+				{% block btn_back %}{% endblock %}
+			</div>
+			{% block header_title %}{% endblock %}
+			<div class='nav-pack'>
+				{% block nav_right_options %}{% endblock %}
+			</div>
+		</nav>
+
+		<main>
+			{% block content %}{% endblock %}
+			{% block option_menu %}{% endblock %}
+		</main>
+
+		<!-- <aside id='side-bar' class='side-bar-dimmed'> -->
+		<aside id='side-bar' class='side-bar-dimmed' style='display:none'>
+	    	<nav class='side-bar'>
+	    		<header class='side-bar-header'>
+	    			<span class='side-bar-header-title'>AMBIT</span>
+					<button class='btn-side-bar-close' onclick='closeNav()'>&#x2A2F</button>
+	    		</header>
+			    <ul class='list-nav'>
+			      	{% with request.path as url %}
+				        <a href='{% url "colonies:list" %}' class="{% if 'colonies' in url %}active{% endif %}">Colonias</a>
+				        <a href='{% url "cats:list" %}' class="{% if 'cats' in url %}active{% endif %}">Gatos</a>
+			        {% endwith %}
+			    </ul>
+		    </nav>
+		</aside>
+
+		{% block modal %}{% endblock %}
+
+	</body>
+
+	<script type="text/javascript" src='{% static "js/base.js" %}'></script>
+	{% block scripts %}{% endblock %}
+
+</html>

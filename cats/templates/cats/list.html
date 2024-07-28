@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cats{% endblock %}
+
+{% block links %}
+  <link rel="stylesheet" href="{% static 'css/list.css' %}">
+  <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+  <link rel="stylesheet" href="{% static 'css/option-menu.css' %}">
+  <link rel="stylesheet" href="{% static 'cats/css/modal-form-filter.css' %}">
+{% endblock %}
+
+{% block header_title %}
+  <div class='nav-title'>{% if colony %}{{colony.name}}{% else %}Gatos{% endif %}</div>
+{% endblock %}
+
+{% block nav_right_options %}
+  <button onclick='toggleModalFilter()' class='btn-icon ic-filter'></button>
+  <a class='btn-icon ic-add' href="{% url 'cats:create' %}?{{request.GET.urlencode}}"></a>
+  <button id='btn-option-menu' class='btn-icon ic-more'></button>
+{% endblock %}
+
+{% block content %}
+
+  <div class='list-container'>
+    
+    {% for cat in list_cat %}
+      <a class='list-item' href='{% url "cats:detail" pk=cat.id %}'>
+        <div class='thumbnail-wrapper'>
+          <img class='list-item-thumbnail' src='{% if cat.thumbnail %}{{cat.thumbnail.url}}{% endif %}'>
+        </div>
+        <div class='list-fields'>
+          <span class='list-item-name'>
+            {{cat.name}}
+              <i class='icon icon-small {% if cat.gender %}ic-female{% else %}ic-male{% endif %}'></i>
+          </span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block option_menu %}
+  <div id='option-menu' style='display:none'>
+    <ul class='option-menu-list'>
+      <li id='option-create-census'>Generar Censo</li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block modal %}
+
+  <div id='modal-filter' class='modal-form-wrapper' style='display:none'>
+  <!-- <div id='modal-filter' class='modal-form-wrapper'> -->
+    <div class='modal-form-container'>
+      <div class='modal-form-header'>
+        Filtros
+        <button id='btn-modal-close' class='btn-modal-close'>&#x2A2F</button>
+      </div>
+      <form id='form-filter' method='GET' action='{% url "cats:list" %}'>
+          <div class='modal-form-body'>
+            {% for field in form_cat_filter.visible_fields|slice:"0:3" %}
+                {{field.label_tag}}
+                {{field}}
+            {% endfor %}
+          </div>
+
+          <button id='btn-show-more' type='button' onclick='toggleAdvancedForm()'>Mostrar más</button>
+          
+          <div id='div-advanced-form' class='modal-form-body' style='display:none'>
+              {% for field in form_cat_filter.visible_fields|slice:"3:" %}
+                {{field.label_tag}}
+                {{field}}
+            {% endfor %}
+          </div>
+      </form>
+      <div class='modal-form-footer'>
+        <a class='btn-modal-submit' href='{% url "cats:list" %}'>Reset</a>
+        <input type='submit' form='form-filter' value='Buscar' class='btn-modal-submit'>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
+
+{% block scripts %}
+  <script type='text/javascript' src="{% static 'js/option-menu.js' %}"></script>
+  <script type='text/javascript' src='{% static "cats/js/modal-form-filter.js" %}'></script>
+  <script type='text/javascript' src='{% static "cats/js/list.js" %}'></script>
+{% endblock %}

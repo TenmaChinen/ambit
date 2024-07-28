@@ -1,0 +1,102 @@
+.detail-container{
+  position: relative;
+  border-radius: 2px;
+  background-color: white;
+  box-shadow: gray 1px 1px 5px;
+  width:95%;
+  max-width: 450px;
+  height: 96%;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  overflow-y: hidden;
+}
+
+/* --- */
+
+.detail-header{
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  background-color: rgb(70, 70, 70);
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-header-title{
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+/* ---  */
+
+.detail-title{
+  font-size: 20px;
+  align-self: center;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  margin: 10px;
+  background-color: rgb(126, 174, 147);
+  border-radius: 5px;
+  width: 90%;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Definition List ( Container ) */
+
+.detail-image-wrapper{
+  width: 100%;
+  height: auto;
+}
+
+.detail-table-wrapper{
+  overflow-y: auto;
+}
+
+.detail-table{
+  padding: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+  grid-row-gap: 2px;
+  font-size: 16px;
+  align-items: center;
+  border: 1px solid lightgrey;
+  margin: 6px;
+}
+
+.detail-table > label{
+  text-align: center;
+  font-weight: bold;
+  color: #363636;
+  background: none;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid #737373;
+}
+
+.detail-table > span{
+  font-weight: bold;
+  color: #585858;
+}
+
+.span-date{
+  color:#787878;
+  margin-left: 10px;
+}
+
+#btn-show-more{
+  font-size: 14px;
+  color:#3B3B3B;
+  font-weight: bold;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
