@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block btn_back %}
-  <a class='btn-icon ic-back' href='{% url "cats:detail" pk=pk %}?{{request.GET.urlencode}}'></a>
+  <a class='btn-icon ic-back' href='{% url "cats:detail" pk=pk %}'></a>
 {% endblock %}
 
 {% block header_title %}
@@ -74,7 +74,7 @@
     <div class='form-footer'>
       <div></div>
       <div class='footer-group'>
-        <a type='button' class='btn-form' href='{% url "cats:detail" pk=pk %}?{{request.GET.urlencode}}'>Cancelar</a>
+        <a type='button' class='btn-form' href='{% url "cats:detail" pk=pk %}'>Cancelar</a>
         <button type='submit' form='form' class='btn-form'>Guardar</button>
       </div>
     </div>

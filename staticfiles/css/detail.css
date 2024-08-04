@@ -5,13 +5,14 @@
   box-shadow: gray 1px 1px 5px;
   width:95%;
   max-width: 450px;
+  min-height: 600px;
   height: 96%;
   display: flex;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  overflow-y: hidden;
+  margin-bottom: 10px;
 }
 
 /* --- */
@@ -57,6 +58,7 @@
 
 .detail-table-wrapper{
   overflow-y: auto;
+  padding-bottom: 10px;
 }
 
 .detail-table{

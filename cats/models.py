@@ -1,7 +1,9 @@
 from colonies.models import Colony
 from diseases.models import Disease
 from django.db import models
+from cats import utils
 import pdb
+import os
 
 T_SEX_CHOICES = ((False, 'Macho'), (True, 'Hembra'))
 T_STATE_CHOICES = ((0, 'Presente'), (1, 'Fallecido'),(2, 'Desaparecido'),(3,'Adoptado'))
@@ -33,21 +35,34 @@ class Cat(models.Model):
 
     def delete(self, *args, **kwargs):
         for picture in self.pictures.all():
-            picture.delete()
+            picture.delete(save=False)
 
-        if self.thumbnail:
-            self.thumbnail.delete()
+        if self.photo and os.path.isfile(self.photo.path):
+            self.photo.delete(save=False)
         
+        # pdb.set_trace()
+
+        if self.thumbnail and os.path.isfile(self.thumbnail.path):
+            self.thumbnail.delete(save=False)
+
         super().delete(*args, **kwargs)
 
+
     def save(self, *args, **kwargs):
+    
         if self.id:
             cat = Cat.objects.get(id=self.id)
-            if cat.photo and self.photo != cat.photo:
+            if cat.photo and os.path.isfile(cat.photo.path):
                 cat.photo.delete(save=False)
-
-            if cat.thumbnail and self.thumbnail != cat.thumbnail:
+            if cat.thumbnail and os.path.isfile(cat.thumbnail.path):
                 cat.thumbnail.delete(save=False)
+        else:
+            super().save(*args, **kwargs)
+
+        bytes_io = utils.to_thumbnail(self.photo)
+        file_name = utils.format_image_name(self.id)
+        self.thumbnail.save(name=file_name, content=bytes_io, save=False)
+
         super().save(*args, **kwargs)
 
 class CatPicture(models.Model):

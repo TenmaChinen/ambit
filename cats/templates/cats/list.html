@@ -16,28 +16,37 @@
 
 {% block nav_right_options %}
   <button onclick='toggleModalFilter()' class='btn-icon ic-filter'></button>
-  <a class='btn-icon ic-add' href="{% url 'cats:create' %}?{{request.GET.urlencode}}"></a>
+  <a class='btn-icon ic-add' href="{% url 'cats:create' %}"></a>
   <button id='btn-option-menu' class='btn-icon ic-more'></button>
 {% endblock %}
 
 {% block content %}
 
-  <div class='list-container'>
+  {% if list_cat %}
+    <div class='list-container'>
+      {% for cat in list_cat %}
+        <a class='list-item' href='{% url "cats:detail" pk=cat.id %}'>
+          <div class='thumbnail-wrapper'>
+            <img class='list-item-thumbnail' src='{% if cat.thumbnail %}{{cat.thumbnail.url}}{% endif %}'>
+          </div>
+          <div class='list-fields'>
+            <span class='list-item-name'>
+              {{cat.name}}
+              {% if cat.sterilized %}
+                <i class='icon icon-small {% if cat.gender %}ic-female-neutered{% else %}ic-male-neutered{% endif %}'></i>
+              {% else %}
+                <i class='icon icon-small {% if cat.gender %}ic-female{% else %}ic-male{% endif %}'></i>
+              {% endif %}
+            </span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <span class='span-message'>Pulsa + para<br>añadir gatos</span>
+  {% endif %}
     
-    {% for cat in list_cat %}
-      <a class='list-item' href='{% url "cats:detail" pk=cat.id %}'>
-        <div class='thumbnail-wrapper'>
-          <img class='list-item-thumbnail' src='{% if cat.thumbnail %}{{cat.thumbnail.url}}{% endif %}'>
-        </div>
-        <div class='list-fields'>
-          <span class='list-item-name'>
-            {{cat.name}}
-              <i class='icon icon-small {% if cat.gender %}ic-female{% else %}ic-male{% endif %}'></i>
-          </span>
-        </div>
-      </a>
-    {% endfor %}
-  </div>
 {% endblock %}
 
 {% block option_menu %}
@@ -58,6 +67,7 @@
         <button id='btn-modal-close' class='btn-modal-close'>&#x2A2F</button>
       </div>
       <form id='form-filter' method='GET' action='{% url "cats:list" %}'>
+          <input type='hidden' name='filter' value='true'>
           <div class='modal-form-body'>
             {% for field in form_cat_filter.visible_fields|slice:"0:3" %}
                 {{field.label_tag}}
@@ -75,8 +85,31 @@
           </div>
       </form>
       <div class='modal-form-footer'>
-        <a class='btn-modal-submit' href='{% url "cats:list" %}'>Reset</a>
+        <a class='btn-modal-submit' href='{% url "cats:list" %}?filter=true'>Reset</a>
         <input type='submit' form='form-filter' value='Buscar' class='btn-modal-submit'>
+      </div>
+    </div>
+  </div>
+
+  <div id='modal-census' class='modal-form-wrapper' style='display:none'>
+  <!-- <div id='modal-census' class='modal-form-wrapper'> -->
+    <div class='modal-form-container'>
+      <div class='modal-form-header'>
+        Crear censo
+        <button id='btn-modal-close' class='btn-modal-close'>&#x2A2F</button>
+      </div>
+      <form id='form-census' method='POST' action='{% url "downloads:census" %}'>
+        {% csrf_token %}
+        <div class='modal-form-body'>
+          {% for field in form_census %}
+              {{field.label_tag}}
+              {{field}}
+          {% endfor %}
+        </div>
+      </form>
+      <div class='modal-form-footer'>
+        <div></div>
+        <input type='submit' form='form-census' value='Crear' class='btn-modal-submit'>
       </div>
     </div>
   </div>

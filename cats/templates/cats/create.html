@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block btn_back %}
-  <a class='btn-icon ic-back' href='{% url "cats:list" %}?{{request.GET.urlencode}}'></a>
+  <a class='btn-icon ic-back' href='{% url "cats:list" %}'></a>
 {% endblock %}
 
 {% block header_title %}
@@ -20,60 +20,62 @@
 {% endblock %}
 
 {% block content %}
-<div class='form-container'>
 
-  <div class='form-body'>
-    <form id='form' method='POST' enctype='multipart/form-data'>
-        {% csrf_token %}
+  <div class='form-container'>
 
-          {{form_cat.photo}}
-          <div id='btn-image-placeholder'>
-            <i id='ic-image-placeholder' class='icon ic-image-placeholder'></i>
-            <img id='image-tray' src='' style='display:none;'>
-          </div>
+    <div class='form-body'>
+      <form id='form' method='POST' enctype='multipart/form-data'>
+          {% csrf_token %}
 
-        <div class='form-table'>
-          {% for field in form_cat.visible_fields|slice:"1:4" %}
-            <div class="form-field">
-              {{field.label_tag}}
-              {{field}}
-              {{field.errors}}
+            {{form_cat.photo}}
+            <div id='btn-image-placeholder'>
+              <i id='ic-image-placeholder' class='icon ic-image-placeholder'></i>
+              <img id='image-tray' src='' style='display:none;'>
             </div>
-          {% endfor %}
-        
-          <div class="form-side">
-              {{form_cat.sterilized.label_tag}}
-              {{form_cat.sterilized}}
+
+          <div class='form-table'>
+            {% for field in form_cat.visible_fields|slice:"1:4" %}
+              <div class="form-field">
+                {{field.label_tag}}
+                {{field}}
+                {{field.errors}}
+              </div>
+            {% endfor %}
+          
+            <div class='form-side'>
+                {{form_cat.sterilized.label_tag}}
+                {{form_cat.sterilized}}
+            </div>
+
+          </div>
+          
+          <div id='btn-show-more' class='btn-form'>Mostrar más</div>
+          
+          <div id='hidden-panel' class='form-list' style='display: none;'>
+            
+            {% for field in form_cat.visible_fields|slice:"5:" %}
+              <div class="form-field">
+                {{field.label_tag}}
+                {{field}}
+                {{field.errors}}
+              </div>    
+            {% endfor %}
+          
           </div>
 
-        </div>
-        
-        <div id='hidden-panel' class='form-list' style='display: none;'>
           
-          {% for field in form_cat.visible_fields|slice:"5:" %}
-            <div class="form-field">
-              {{field.label_tag}}
-              {{field}}
-              {{field.errors}}
-            </div>    
-          {% endfor %}
-        
-        </div>
-
-        <div id='btn-show-more' class='btn-form'>Mostrar más</div>
-        
-    </form>
-  </div>
-
-  <div class="form-footer">
-    <div></div>
-    <div class='footer-group'>
-      <a class='btn-form' href='{% url "cats:list" %}?{{request.GET.urlencode}}'>Cancelar</a>
-      <button type="submit" form="form" class="btn-form">Guardar</button>
+      </form>
     </div>
-  </div>
 
-</div>
+    <div class="form-footer">
+      <div></div>
+      <div class='footer-group'>
+        <a class='btn-form' href='{% url "cats:list" %}'>Cancelar</a>
+        <button type="submit" form="form" class="btn-form">Guardar</button>
+      </div>
+    </div>
+
+  </div>
 
 {% endblock %}
 

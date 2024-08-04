@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'colonies',
     'cages',
     'diseases',
+	'downloads',
 ]
 
 MIDDLEWARE = [

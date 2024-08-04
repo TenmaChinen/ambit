@@ -10,6 +10,7 @@ urlpatterns = [
 	path('', RedirectView.as_view(url='cats/list/')),
 	path('cats/', include('cats.urls')),
 	path('colonies/', include('colonies.urls')),
+	path('downloads/', include('downloads.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

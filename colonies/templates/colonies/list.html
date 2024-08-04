@@ -18,16 +18,17 @@
 
 {% block content %}
 
-  <div class="list-container">
-    
-    {% for colony in list_colony %}
-      <a class='list-item' href='{% url "colonies:detail" pk=colony.id %}'>
-        <div class='list-fields' >
-          <span class='list-item-name'>{{colony.name}}</span>
-        </div>
-      </a>
-    {% endfor %}
-      
-  </div>
-
+  {% if list_colony %}
+    <div class="list-container">
+      {% for colony in list_colony %}
+        <a class='list-item' href='{% url "colonies:detail" pk=colony.id %}'>
+          <div class='list-fields' >
+            <span class='list-item-name'>{{colony.name}}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <span class='span-message'>Pulsa + para<br>añadir colonias</span>
+  {% endif %}
 {% endblock %}

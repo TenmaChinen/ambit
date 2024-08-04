@@ -23,9 +23,8 @@ btnModalClose.addEventListener('click', (e)=>{
 
 
 formFilter.addEventListener('submit', (event)=> {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
 
-    // const form = event.target;
     const params = new URLSearchParams();
 
     const formData = new FormData(formFilter);
@@ -35,9 +34,6 @@ formFilter.addEventListener('submit', (event)=> {
         }
     });
 
-    // Construct the URL
     const url = `${formFilter.action}?${params.toString()}`;
-
-    // Redirect to the constructed URL
     window.location.href = url;
 });

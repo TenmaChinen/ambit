@@ -38,24 +38,6 @@
   cursor: pointer;
 }
 
-.modal-body{
-  font-size: 18px;
-  padding: 12px;
-}
-
-.modal-footer{
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-  font-size: 16px;
-  padding: 8px;
-  column-gap: 10px;
-  margin-top: 5px;
-  border-bottom-left-radius: inherit;
-  border-bottom-right-radius: inherit;
-  color: black;
-}
-
 .modal-form-body{
   padding: 14px;
   display: grid;
@@ -70,7 +52,7 @@
   padding: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: space-between;
   column-gap: 10px;
 }
 

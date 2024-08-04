@@ -7,8 +7,8 @@
 }
 
 .icon-small{
-  width:11px;
-  height:11px;
+  width:13px;
+  height:13px;
 }
 
 .btn-icon{
@@ -59,6 +59,14 @@
 
 .ic-female{
   background-image: url('../icons/ic-female.png');
+}
+
+.ic-male-neutered{
+  background-image: url('../icons/ic-male-neutered.png');
+}
+
+.ic-female-neutered{
+  background-image: url('../icons/ic-female-neutered.png');
 }
 
 .ic-add{
