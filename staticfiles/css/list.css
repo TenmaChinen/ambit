@@ -1,3 +1,12 @@
+.list-scroll{
+  width: 100%;
+  overflow-y: auto;
+  padding-bottom: 100px;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
 .list-container{
   width: 100%;
   max-width: 600px;
@@ -23,9 +32,15 @@
   text-align: center;
 }
 
-.list-item-thumbnail{
+/*.list-item-thumbnail{
   width: 100%;
   height: auto;
+  border-radius: 4px;
+}*/
+
+.list-item-thumbnail{
+  width: 98px;
+  height: 98px;
   border-radius: 4px;
 }
 

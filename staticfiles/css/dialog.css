@@ -60,6 +60,10 @@
   color: black;
 }
 
+.modal-footer > button:hover{
+  color: #474747;
+}
+
 .modal-footer span{
   cursor: pointer;
 }

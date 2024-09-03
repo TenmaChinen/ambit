@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from colonies.forms import FormColony
 from colonies.models import Colony
+from cats.models import Cat
 
 def list_view(request):
 
@@ -26,7 +27,14 @@ def create_view(request):
 
 def detail_view(request,pk):
     colony = Colony.objects.get(id=pk)
-    context = dict(colony=colony)
+
+    list_cat = Cat.objects.filter(colony=colony)
+    list_cat = list_cat.order_by('frequency', 'name')
+
+    context = dict(
+        colony=colony,
+        list_cat=list_cat
+        )
     return render(request, 'colonies/detail.html', context)
 
 

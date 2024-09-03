@@ -13,7 +13,19 @@ def create_view(request):
     if request.method == 'POST':
         form_cat = FormCat(data=request.POST, files=request.FILES)
         if form_cat.is_valid():
-            form_cat.save(commit=True)
+            instance = form_cat.save(commit=True)
+            
+            if 'photo' in request.FILES:
+                file_photo = request.FILES['photo']
+              
+                bytes_photo = utils.to_webp(image_file=file_photo)
+                bytes_thumbnail = utils.to_thumbnail_webp(image_file=file_photo)
+                
+                file_name = utils.format_image_name(cat_id=instance.id)
+                instance.photo.save(name=file_name, content=bytes_photo, save=False)
+                instance.thumbnail.save(name=file_name, content=bytes_thumbnail, save=False)
+                instance.save()
+                
             return redirect('cats:list')
     else:
         d_query = request.session.get('query_cat',{})
@@ -69,7 +81,20 @@ def update_view(request,pk):
     if request.method == 'POST':
         form_cat = FormCat(data=request.POST, files=request.FILES, instance=cat)
         if form_cat.is_valid():
-            form_cat.save(commit=True)
+            instance = form_cat.save(commit=False)
+            
+            if 'photo' in request.FILES:
+            
+                file_photo = request.FILES['photo']
+                bytes_photo = utils.to_webp(image_file=file_photo)
+                bytes_thumbnail = utils.to_thumbnail_webp(image_file=file_photo)
+                
+                file_name = utils.format_image_name(cat_id=cat.id)
+                instance.photo.save(name=file_name, content=bytes_photo, save=False)
+                instance.thumbnail.save(name=file_name, content=bytes_thumbnail, save=False)
+
+            instance.save()
+
             return redirect('cats:detail', pk=pk)
     else:
         form_cat = FormCat(instance=cat)

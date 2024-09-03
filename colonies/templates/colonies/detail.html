@@ -7,6 +7,7 @@
 {% block links %}
   <link rel='stylesheet' href='{% static "css/icons.css" %}'>
   <link rel='stylesheet' href='{% static "css/detail.css" %}'>
+  <link rel='stylesheet' href='{% static "css/list.css" %}'>
   <link rel='stylesheet' href='{% static "css/option-menu.css" %}'>
   <link rel='stylesheet' href='{% static "css/dialog.css" %}'>
 {% endblock %}
@@ -28,7 +29,7 @@
 <div class='detail-container'>
   
   <div class='detail-table-wrapper'>
-      
+
     <div class='detail-table'>  
       <label>Nombre</label>
       <span>{{colony.name}}</span>
@@ -39,6 +40,32 @@
   
   </div>
   
+  {% if list_cat %}
+
+  <div class='list-scroll'>
+    <div class='list-container'>
+      {% for cat in list_cat %}
+        <a class='list-item' href='{% url "cats:detail" pk=cat.id %}'>
+          <div class='thumbnail-wrapper'>
+            <img class='list-item-thumbnail' src='{% if cat.thumbnail %}{{cat.thumbnail.url}}{% endif %}'>
+          </div>
+          <div class='list-fields'>
+            <span class='list-item-name'>
+              {{cat.name}}
+              {% if cat.sterilized %}
+                <i class='icon icon-small {% if cat.gender %}ic-female-neutered{% else %}ic-male-neutered{% endif %}'></i>
+              {% else %}
+                <i class='icon icon-small {% if cat.gender %}ic-female{% else %}ic-male{% endif %}'></i>
+              {% endif %}
+            </span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <span class='span-message'>No hay gatos<br>en esta colonia</span>
+    {% endif %}
+  </div>
 </div>
 
 {% endblock %}

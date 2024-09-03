@@ -23,11 +23,12 @@
 {% block content %}
 
   {% if list_cat %}
+  <div class='list-scroll'>
     <div class='list-container'>
       {% for cat in list_cat %}
         <a class='list-item' href='{% url "cats:detail" pk=cat.id %}'>
           <div class='thumbnail-wrapper'>
-            <img class='list-item-thumbnail' src='{% if cat.thumbnail %}{{cat.thumbnail.url}}{% endif %}'>
+            <img class='list-item-thumbnail' src='{% if cat.thumbnail %}{{cat.thumbnail.url}}{% endif %}' loading='lazy'>
           </div>
           <div class='list-fields'>
             <span class='list-item-name'>
@@ -42,6 +43,7 @@
         </a>
       {% endfor %}
     </div>
+  </div>
 
   {% else %}
     <span class='span-message'>Pulsa + para<br>añadir gatos</span>

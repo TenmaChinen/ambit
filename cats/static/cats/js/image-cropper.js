@@ -50,5 +50,5 @@ function saveCroppedImage(){
 
   const croppedImage = croppedCanvas.toBlob((blob) =>{
     displayCroppedImage(blob);
-  }, 'image/jpeg',1);
+  }, 'image/webp',1);
 }

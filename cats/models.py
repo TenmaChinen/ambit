@@ -49,21 +49,36 @@ class Cat(models.Model):
 
 
     def save(self, *args, **kwargs):
-    
         if self.id:
             cat = Cat.objects.get(id=self.id)
-            if cat.photo and os.path.isfile(cat.photo.path):
-                cat.photo.delete(save=False)
-            if cat.thumbnail and os.path.isfile(cat.thumbnail.path):
-                cat.thumbnail.delete(save=False)
-        else:
-            super().save(*args, **kwargs)
-
-        bytes_io = utils.to_thumbnail(self.photo)
-        file_name = utils.format_image_name(self.id)
-        self.thumbnail.save(name=file_name, content=bytes_io, save=False)
+            if self.photo and self.photo != cat.photo:
+                if cat.photo and os.path.isfile(cat.photo.path):
+                    cat.photo.delete(save=False)
+                if cat.thumbnail and os.path.isfile(cat.thumbnail.path):
+                    cat.thumbnail.delete(save=False)
 
         super().save(*args, **kwargs)
+
+    # def save(self, *args, **kwargs):
+    #     if self.id:
+    #         cat = Cat.objects.get(id=self.id)
+    #         if self.photo and self.photo != cat.photo:
+    #             if cat.photo and os.path.isfile(cat.photo.path):
+    #                 cat.photo.delete(save=False)
+    #             if cat.thumbnail and os.path.isfile(cat.thumbnail.path):
+    #                 cat.thumbnail.delete(save=False)
+    #             photo = self.photo
+    #         else:
+    #             photo = cat.photo
+    #     else:
+    #         super().save(*args, **kwargs)
+    #         photo = self.photo
+
+    #     bytes_io = utils.to_thumbnail(photo)
+    #     file_name = utils.format_image_name(self.id)
+    #     self.thumbnail.save(name=file_name, content=bytes_io, save=False)
+
+    #     super().save(*args, **kwargs)
 
 class CatPicture(models.Model):
     image = models.ImageField(upload_to='cats', verbose_name='Foto')

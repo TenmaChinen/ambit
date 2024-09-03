@@ -8,6 +8,7 @@
   min-height: 600px;
   height: 96%;
   display: flex;
+  padding-bottom: 20px;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
@@ -57,8 +58,12 @@
 }
 
 .detail-table-wrapper{
-  overflow-y: auto;
   padding-bottom: 10px;
+  overflow-y: auto;
+  flex-grow: 0;
+  flex-shrink: 1;
+  max-height: 200px;
+  flex-basis: auto;
 }
 
 .detail-table{
@@ -68,7 +73,7 @@
   column-gap: 8px;
   grid-row-gap: 2px;
   font-size: 16px;
-  align-items: center;
+  align-items: top;
   border: 1px solid lightgrey;
   margin: 6px;
 }
