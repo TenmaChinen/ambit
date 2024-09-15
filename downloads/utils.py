@@ -9,7 +9,7 @@ DIR_ICONS = BASE_DIR / 'staticfiles' / 'icons'
 
 def create_census_pdf(colony_id):
 
-    queryset = Cat.objects.filter(colony=colony_id)
+    queryset = Cat.objects.filter(colony=colony_id, state=0, frequency=0)
     queryset = queryset.order_by('-sterilized')
     values_queryset = queryset.values_list('name','thumbnail','sterilized','gender')
     

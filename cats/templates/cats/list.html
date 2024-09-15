@@ -69,22 +69,22 @@
         <button id='btn-modal-close' class='btn-modal-close'>&#x2A2F</button>
       </div>
       <form id='form-filter' method='GET' action='{% url "cats:list" %}'>
-          <input type='hidden' name='filter' value='true'>
-          <div class='modal-form-body'>
-            {% for field in form_cat_filter.visible_fields|slice:"0:3" %}
-                {{field.label_tag}}
-                {{field}}
-            {% endfor %}
-          </div>
+        <input type='hidden' name='filter' value='true'>
+        <div class='modal-form-body'>
+          {% for field in form_cat_filter.visible_fields|slice:"0:3" %}
+              {{field.label_tag}}
+              {{field}}
+          {% endfor %}
+        </div>
 
-          <button id='btn-show-more' type='button' onclick='toggleAdvancedForm()'>Mostrar más</button>
-          
-          <div id='div-advanced-form' class='modal-form-body' style='display:none'>
-              {% for field in form_cat_filter.visible_fields|slice:"3:" %}
-                {{field.label_tag}}
-                {{field}}
-            {% endfor %}
-          </div>
+        <button id='btn-show-more' type='button' onclick='toggleAdvancedForm()'>Mostrar más</button>
+        
+        <div id='div-advanced-form' class='modal-form-body' style='display:none'>
+            {% for field in form_cat_filter.visible_fields|slice:"3:" %}
+              {{field.label_tag}}
+              {{field}}
+          {% endfor %}
+        </div>
       </form>
       <div class='modal-form-footer'>
         <a class='btn-modal-submit' href='{% url "cats:list" %}?filter=true'>Reset</a>

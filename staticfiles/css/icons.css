@@ -32,6 +32,10 @@
 
 /*  */
 
+.ic-menu{
+  background-image: url('../icons/ic-menu.webp');
+}
+
 .ic-edit{
   background-image: url('../icons/ic-edit.png');
   filter: contrast(20%);

@@ -21,6 +21,12 @@ btnModalClose.addEventListener('click', (e)=>{
 });
 
 
+modalFilter.addEventListener('click', (e)=>{
+  if (e.target == modalFilter){
+    modalFilter.style.display = 'none';
+  }
+});
+
 
 formFilter.addEventListener('submit', (event)=> {
     event.preventDefault();
