@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
   background: #5D5D5DA0;
+  z-index: 100;
 }
 
 .option-menu-list{
