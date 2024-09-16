@@ -171,3 +171,16 @@ button{
   align-items: center;
   gap: 5px;
 }
+
+.hline{
+  margin-bottom: 15px;
+  margin-top: 15px;
+  border-color: #C2BEBE;
+  border-style: dashed;
+}
+
+.separator{
+  height: 30px;
+  box-shadow: gray 1px 1px 5px;
+  background-color: white;
+}

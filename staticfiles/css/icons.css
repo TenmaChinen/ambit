@@ -89,3 +89,7 @@
   background-image: url('../icons/ic-search.png');
   filter: contrast(10%);
 }
+
+.ic-save{
+  background-image: url('../icons/ic-save.webp');
+}

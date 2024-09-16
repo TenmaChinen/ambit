@@ -23,13 +23,15 @@
 {% endblock %}
 
 {% block content %}
-  <div class="detail-container">
+  <div class='detail-container'>
     
     <img class='detail-image-wrapper' src='{% if cat.photo %}{{cat.photo.url}}{% endif %}'>
     
-    <div class='detail-table-wrapper'>
+    <div class='separator'></div>
+
+    <div class='detail-list-wrapper'>
       
-      <div class='detail-table'>  
+      <div class='detail-list'>  
         <label>Colonia</label>
         <span>{% if cat.colony %}{{cat.colony}}{% else %}Sin Colonia{% endif %}</span>
         
@@ -51,12 +53,11 @@
         <label>Estado</label>
         <span>{{cat.get_state_display}}</span>
 
-
       </div>
     
-      <button id='btn-show-more'>Mostrar más</button>
+      <hr class='hline'>
     
-      <div id='div-detail-table' class='detail-table' style='display:none'>  
+      <div class='detail-list'>
           
         <label>Edad</label>
         <span>{% if cat.age %}cat.age{% else %}-{% endif %}</span>

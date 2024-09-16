@@ -1,11 +1,3 @@
-const divDetailTable = document.getElementById('div-detail-table');
-const btnShowMore = document.getElementById('btn-show-more');
-
-btnShowMore.addEventListener('click', (e)=>{
-  const state = divDetailTable.style.display === 'none';
-  divDetailTable.style.display = state ? '' : 'none';
-  btnShowMore.innerHTML = state ? 'Mostrar menos' : 'Mostrar más';
-});
 
 // Option Menu
 

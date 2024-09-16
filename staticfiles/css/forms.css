@@ -1,14 +1,18 @@
+.form-scroll{
+  width: 100%;
+  overflow-y: auto;
+}
+
 .form-container{
   border-radius: 2px;
   background-color: white;
-  box-shadow: gray 1px 1px 5px;
   display: flex;
   width: 95%;
   max-width: 360px;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
+  padding-bottom: 50px;
 }
 
 .form-header{
@@ -23,6 +27,7 @@
 
 .form-body{
   padding: 15px;
+  overflow-y: auto;
 }
 
 .form-list{

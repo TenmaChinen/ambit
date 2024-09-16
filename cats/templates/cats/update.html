@@ -14,21 +14,22 @@
   <a class='btn-icon ic-back' href='{% url "cats:detail" pk=pk %}'></a>
 {% endblock %}
 
+{% block nav_right_options %}
+  <button type='submit' form='form' class='icon btn-icon ic-save'></button>
+{% endblock %}
+
 {% block header_title %}
   <div class='nav-title'>Editar</div>
 {% endblock %}
 
 {% block content %}
 
-  <div class='form-container'>
-
-    <div class='form-body'>
-
-      <form id='form' method='POST' enctype='multipart/form-data'>
-        {% csrf_token %}
-
+  <div class='form-scroll'>
+    <div class='form-container'>
+      <div class='form-body'>
+        <form id='form' method='POST' enctype='multipart/form-data'>
+          {% csrf_token %}
           <div class='form-list'>
-            
             <div class='form-field'>
               {{form_cat.photo.label_tag}}
               {{form_cat.photo}}
@@ -53,9 +54,9 @@
 
           </div>
 
-          <div id='btn-show-more' class='btn-form'>Mostrar más</div>
-          
-          <div id='hidden-panel' class='form-list' style='display: none;'>
+          <hr class='hline'>
+
+          <div class='form-list'>
             
             {% for field in form_cat.visible_fields|slice:'5:' %}
               <div class='form-field'>
@@ -70,15 +71,7 @@
           
       </form>
     </div>
-
-    <div class='form-footer'>
-      <div></div>
-      <div class='footer-group'>
-        <a type='button' class='btn-form' href='{% url "cats:detail" pk=pk %}'>Cancelar</a>
-        <button type='submit' form='form' class='btn-form'>Guardar</button>
-      </div>
-    </div>
-
+  </div>
 </div>
 
 {% endblock %}

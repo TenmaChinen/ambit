@@ -10,6 +10,7 @@ T_STATE_CHOICES = ((0, 'Presente'), (1, 'Fallecido'),(2, 'Desaparecido'),(3,'Ado
 T_YES_NO = ((False,'No'),(True,'Sí'))
 T_FREQUENCY = ((0,'Habitual'),(1,'Ocasional'))
 T_SOCIABILITY = ((0,'Sí'),(1,'Ocasional'),(2,'No'))
+T_AGES = ((0,'Adulto'),(1,'Joven'),(2,'Bebé'))
 
 class Cat(models.Model):
     photo = models.ImageField(upload_to='cat-photos', verbose_name='Icono', blank=True, null=True)
@@ -25,6 +26,7 @@ class Cat(models.Model):
     sterlize_date = models.DateField(blank=True, null=True, verbose_name='Fecha de esterilización')
     state = models.PositiveSmallIntegerField(blank=True, null=True, choices=T_STATE_CHOICES, default=0, verbose_name='Estado')
     frequency = models.PositiveSmallIntegerField(blank=True, null=True, choices=T_FREQUENCY, verbose_name='Frecuencia de visita', default=0)
+    age = models.PositiveSmallIntegerField(blank=True, null=True, choices=T_AGES,  verbose_name='Edad', default=0)
     sociability = models.PositiveSmallIntegerField(blank=True, null=True, choices=T_SOCIABILITY, verbose_name='Sociable', default=1)
     sighting_date = models.DateField(verbose_name='Fecha de avistamiento', blank=True, null=True)
     disease = models.ForeignKey(to=Disease, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Afecciones')
