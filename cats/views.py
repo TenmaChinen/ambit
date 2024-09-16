@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from cats.forms import FormCat, FormCatFilter
 from downloads.forms import FormCensus
+from django.db.models import Count, Q
 from colonies.models import Colony
 from django.urls import reverse
 from cats.models import Cat
@@ -57,10 +58,20 @@ def list_view(request):
     records = Cat.objects.filter(**d_query)
     records = records.order_by('frequency', 'name')
     
+    d_aggregate = records.aggregate(
+        total_cats = Count('id'),
+        n_neutered = Count('id', filter=Q(sterilized=True)),
+        n_males = Count('id', filter=Q(gender=False)),
+        n_females = Count('id', filter=Q(gender=True)),
+        males_neutered = Count('id', filter=Q(gender=False, sterilized=True)),
+        females_neutered = Count('id', filter=Q(gender=True, sterilized=True)),
+    )
+
     context = dict(
         list_cat=records,
         form_cat_filter=form_cat_filter,
-        form_census=FormCensus(initial={'colony' : d_query.get('colony')})
+        form_census=FormCensus(initial={'colony' : d_query.get('colony')}),
+        **d_aggregate
     )
     
     if 'colony' in d_query:

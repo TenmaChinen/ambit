@@ -22,6 +22,28 @@
 
 {% block content %}
 
+  <div class='sub-info-bar'>  
+    <span class='sub-info-group'>
+      
+      <span class='sub-info-pair'>
+        <i class='icon icon-small ic-female-neutered'></i>
+        <strong class='sub-info-value'>{{females_neutered}}/{{n_females}}</strong>
+      </span>
+    
+      <span class='sub-info-pair'>
+        <i class='icon icon-small ic-male-neutered'></i>
+        <strong class='sub-info-value'>{{males_neutered}}/{{n_males}}</strong>
+      </span>
+    </span>
+
+    <span class='sub-info-group'>
+    
+      <span class='sub-info-pair'>
+        <strong class='sub-info-value'>{{n_neutered}}/{{total_cats}}</strong>
+      </span>
+    </span>
+  </div>
+
   {% if list_cat %}
   <div class='list-scroll'>
     <div class='list-container'>
