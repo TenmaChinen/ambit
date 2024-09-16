@@ -55,6 +55,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context.static_version',
             ],
         },
     },
@@ -123,3 +124,5 @@ STATICFILES_DIRS = [ BASE_DIR / 'staticfiles',]
 # ADDED TO GET CSS STYLES AND RESOURCES FROM STATIC FOLDER
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+STATIC_VERSION = '1.01'

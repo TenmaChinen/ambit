@@ -8,8 +8,8 @@
 		
 		<title>{% block title %}AMBIT{% endblock %}</title>
 
-		<link rel='stylesheet' href='{% static "css/base.css" %}'>
-		<link rel='stylesheet' href='{% static "css/icons.css" %}'>
+		<link rel='stylesheet' href='{% static "css/base.css" %}?v={{STATIC_VERSION}}'>
+		<link rel='stylesheet' href='{% static "css/icons.css" %}?v={{STATIC_VERSION}}'>
 
 		{% block links %}{% endblock %}
 		

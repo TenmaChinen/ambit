@@ -4,10 +4,10 @@
 {% block title %}Editar Gato{% endblock %}
 
 {% block links %}
-  <link rel='stylesheet' href='{% static "css/cropper.min.css" %}'>
-  <link rel='stylesheet' href='{% static "cats/css/image-cropper.css" %}'>
-  <link rel='stylesheet' href='{% static "css/forms.css" %}'>
-  <link rel='stylesheet' href='{% static "cats/css/create.css" %}'>
+  <link rel='stylesheet' href='{% static "css/cropper.min.css" %}?v={{STATIC_VERSION}}'>
+  <link rel='stylesheet' href='{% static "cats/css/image-cropper.css" %}?v={{STATIC_VERSION}}'>
+  <link rel='stylesheet' href='{% static "css/forms.css" %}?v={{STATIC_VERSION}}'>
+  <link rel='stylesheet' href='{% static "cats/css/create.css" %}?v={{STATIC_VERSION}}'>
 {% endblock %}
 
 {% block btn_back %}

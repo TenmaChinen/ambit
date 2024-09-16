@@ -4,10 +4,10 @@
 {% block title %}Nuevo Gato{% endblock %}
 
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/icons.css' %}">
-  <link rel="stylesheet" href="{% static 'css/detail.css' %}">
-  <link rel="stylesheet" href="{% static 'css/option-menu.css' %}">
-  <link rel="stylesheet" href="{% static 'css/dialog.css' %}">
+  <link rel="stylesheet" href="{% static 'css/icons.css' %}?v={{STATIC_VERSION}}">
+  <link rel="stylesheet" href="{% static 'css/detail.css' %}?v={{STATIC_VERSION}}">
+  <link rel="stylesheet" href="{% static 'css/option-menu.css' %}?v={{STATIC_VERSION}}">
+  <link rel="stylesheet" href="{% static 'css/dialog.css' %}?v={{STATIC_VERSION}}">
 {% endblock %}
 
 {% block btn_back %}
