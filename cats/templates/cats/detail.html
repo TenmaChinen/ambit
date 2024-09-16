@@ -60,7 +60,7 @@
       <div class='detail-list'>
           
         <label>Edad</label>
-        <span>{% if cat.age %}cat.age{% else %}-{% endif %}</span>
+        <span>{% if cat.get_age_display %}{{cat.get_age_display}}{% else %}-{% endif %}</span>
 
         <label>Avistamiento</label>
         <span>{{cat.sighting_date|date:"d/m/y"}}</span>

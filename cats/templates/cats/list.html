@@ -55,10 +55,14 @@
           <div class='list-fields'>
             <span class='list-item-name'>
               {{cat.name}}
-              {% if cat.sterilized %}
-                <i class='icon icon-small {% if cat.gender %}ic-female-neutered{% else %}ic-male-neutered{% endif %}'></i>
+              {% if cat.gender is None %}
+              <i>-</i>
               {% else %}
-                <i class='icon icon-small {% if cat.gender %}ic-female{% else %}ic-male{% endif %}'></i>
+                {% if cat.sterilized %}
+                  <i class='icon icon-small {% if cat.gender %}ic-female-neutered{% else %}ic-male-neutered{% endif %}'></i>
+                {% else %}
+                  <i class='icon icon-small {% if cat.gender %}ic-female{% else %}ic-male{% endif %}'></i>
+                {% endif %}
               {% endif %}
             </span>
           </div>
